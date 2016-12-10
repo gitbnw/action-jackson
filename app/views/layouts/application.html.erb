@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
+  <title>Tic Tac Toe</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+ <div class="row">  
+ <div class="col-md-12 text-center bg-warning">
+<%= notice %>
+       </div>
+</div>
+ <div class="row"> 
+ <div class="col-md-12 text-center bg-danger">
+<%= alert %>
+       </div>
+</div>
 <%= yield %>
 
 </body>
