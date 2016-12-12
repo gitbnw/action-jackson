@@ -1,10 +1,11 @@
 class SquareBroadcastJob < ApplicationJob
   queue_as :default
 
-  def perform(square)
+  def perform(square, squares)
     ActionCable.server.broadcast "game_#{square.game.id}_channel",
-                                      square: square,
-                                      user: User.find(square.user)
+                                      squares: squares.to_a,
+                                      user: User.find(square.user),
+                                      game: Game.find(square.game)
     end
 
   private

@@ -12,6 +12,9 @@ class GameChannel < ApplicationCable::Channel
     square = Square.find(data['square'])
     square.update(user: current_user, status: "owned by #{current_user.name}")
     game = Game.find(square.game)
+    game.users.delete[current_user]
+    other_user = game.users[0]
+    game.update(turn: other_user)
   end 
 
   

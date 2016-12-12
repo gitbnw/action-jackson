@@ -18,18 +18,29 @@ jQuery(document).on 'turbolinks:load', ->
         received: (data) ->
           # jquery to update page - turn - hide buttons
           # players.html()
-          @updateSquare data
+          @updateSquares data
   
-        updateSquare: (data) ->
-          console.log data
-          html = @renderSquare data
-          square = $("#square-"+ data["square"]["id"])
-          console.log square
-          square.html html
-     
-        renderSquare: (data) ->
-          "<div class='row' id='square-'" + data["square"]["id"] + "> position: "+ data["square"]["position"] + " status: "+ data["square"]["status"] + "</div>"
-      
+        updateSquares: (data) ->
+          
+          $squares = $("#squares")
+          # square = $("#square-"+ data["square"]["id"])
+          squares = data["squares"]
+          gameData = data["game"]
+          arrayLength = squares.length
+          i = 0
+          while i < arrayLength
+            html = @renderSquare data["squares"][i], gameData
+            $square = $("#square-"+ data["squares"][i]["id"])
+            $square.html html
+            i++          
+
+        renderSquare: (squareData, gameData) ->
+          console.log squareData
+          if gameData.turn == squareData.user
+            "<div class='row' id='square-'" + squareData["id"] + "> position: "+ squareData["position"] + " status: "+ squareData["status"] + "<button class='take_square'>Take</button></div>"
+          else
+             "<div class='row' id='square-'" + squareData["id"] + "> position: "+ squareData["position"] + " status: "+ squareData["status"] + "</div>"         
+
         take_square: (square, game_id, user_id) ->
           @perform 'take_square', square: square, game_id: game_id, user_id: user_id    
   
