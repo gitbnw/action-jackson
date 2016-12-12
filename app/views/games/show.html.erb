@@ -1,4 +1,23 @@
-<% @squares.each do |square| %>
-position: <%= square.position %><br>
-status: <%= square.status %><br>
+<div class="row wrapper main">
+  <div class="col-md-3 col-md-offset-1" id="player-table"> 
+<% @players.each do |player| %>
+<div class="row">
+name: <%= player.name %>
+</div>
 <% end %>
+<div class="row">
+turn: <%= @game.turn %>
+</div>
+<div class="row">
+you are player: <%= current_user.id %>
+</div>
+<div class="row">
+your turn? <%= @game.turn == current_user.id %>
+</div>
+</div>
+ <div class="col-md-3 col-md-offset-1" id="squares" data-game-id="<%= @game.id %>" data-user-id="<%= current_user.id %>"> 
+<% @squares.each do |square| %>
+<%= render square %>
+<% end %>
+</div>
+</div>

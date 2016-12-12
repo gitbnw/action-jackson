@@ -22,8 +22,7 @@
       <div class="media">
         <div class="media-body">
           <div class="media-heading">
-            <%= link_to "join", game_seat_path(game.id) %>
-            <%= link_to "join", game, class: "index-link" %>
+            <%= link_to "join", edit_game_path(game.id) %>
             game: <%= index %>
             active: <%= game.active %>
             </div>
@@ -33,6 +32,6 @@
     <% end %>
   </div>  
    <div class="col-md-3">
-     <%= link_to "New Game", new_game_path, class: 'btn btn-success' %>
+     <%= link_to "New Game", new_user_game_path(@user), class: 'btn btn-success' %>
    </div>
  </div>

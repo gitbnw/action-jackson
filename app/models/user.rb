@@ -1,14 +1,14 @@
 class User < ApplicationRecord
-  has_many :seats
-  has_many :games, through: :seats
+  has_many :players
+  has_many :games, through: :players
 
   TEMP_EMAIL_PREFIX = 'change@me'
-TEMP_EMAIL_REGEX = /\Achange@me/  
-
+  TEMP_EMAIL_REGEX = /\Achange@me/
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable, 
+    :recoverable, :rememberable, :trackable, :validatable, :confirmable,
     :omniauthable, :omniauth_providers => [:facebook, :google_oauth2, :twitter]
     
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
@@ -41,7 +41,7 @@ TEMP_EMAIL_REGEX = /\Achange@me/
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0,20]
         )
-        # user.skip_confirmation!
+        user.skip_confirmation!
         user.save!
       end
     end
@@ -56,5 +56,6 @@ TEMP_EMAIL_REGEX = /\Achange@me/
 
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
-  end         
+  end
+
 end
