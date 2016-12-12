@@ -15,9 +15,11 @@ you are player: <%= current_user.id %>
 your turn? <%= @game.turn == current_user.id %>
 </div>
 </div>
+
  <div class="col-md-3 col-md-offset-1" id="squares" data-game-id="<%= @game.id %>" data-user-id="<%= current_user.id %>"> 
 <% @squares.each do |square| %>
 <%= render square %>
 <% end %>
 </div>
+
 </div>

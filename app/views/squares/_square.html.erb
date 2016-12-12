@@ -1,7 +1,8 @@
-<div class="row">
+<% game = @game if @game != nil %>
+<div class="row" id="square-<%= square.id %>">
 position: <%= square.position %>
 status: <%= square.status %>
-<% if square.user.nil? && @game.turn == current_user.id %>
+<% if square.user.nil? && game.turn == current_user.id %>
     <button class="take_square" value="<%= square.id %>">Take</button> 
 <% end %>
 </div>
